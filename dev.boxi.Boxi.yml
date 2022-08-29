@@ -9,7 +9,7 @@ modules:
   - name: vte
     sources:
       - type: git
-        url: https://gitlab.gnome.org/GNOME/vte
+        url: https://gitlab.gnome.org/GNOME/vte.git/
         tag: 0.68.0
         commit: 0f438924f9f8a858b1b82434c876e31c2de180d4
     buildsystem: meson
@@ -27,11 +27,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/allisonkarlitskaya/boxi
-        tag: 3
-        commit: 6a6e3bee8078336b725603d32297c23d7561b89c
+        tag: '4'
+        commit: a8449e403bdbc5cf3f78044cfcf9e69e8c50577e
     buildsystem: simple
     build-commands:
       - pip3 install --no-build-isolation --prefix=/app .
+      - glib-compile-schemas --strict /app/share/glib-2.0/schemas
 
 command: boxi
 
