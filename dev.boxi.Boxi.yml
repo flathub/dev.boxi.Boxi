@@ -2,7 +2,7 @@
 
 app-id: dev.boxi.Boxi
 runtime: org.gnome.Platform
-runtime-version: '42'
+runtime-version: '43'
 sdk: org.gnome.Sdk
 
 modules:
@@ -10,25 +10,18 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/vte.git/
-        tag: 0.68.0
-        commit: 0f438924f9f8a858b1b82434c876e31c2de180d4
+        commit: 5bf476f1d7283bc805ac8ae6abe94f81ffd7be05
     buildsystem: meson
-
-  - name: python3-flit_core
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/ad/38/80992c4cb490a05474c886850ec818276d09c0a6722bd5b43bc487818ac7/flit_core-3.7.1-py3-none-any.whl
-        sha256: e454fdbf68c7036e1c7435ec7479383f9d9a1650ca5b304feb184eba1efcdcef
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-build-isolation --prefix=/app flit_core-3.7.1-py3-none-any.whl
+    config-opts:
+      - -Dgtk3=false
+      - -Dgtk4=true
 
   - name: boxi
     sources:
       - type: git
         url: https://github.com/allisonkarlitskaya/boxi
-        tag: '4'
-        commit: a8449e403bdbc5cf3f78044cfcf9e69e8c50577e
+        tag: '5'
+        commit: f92acca8fa0be994c7e80cc5e12b1261b7ec755d
     buildsystem: simple
     build-commands:
       - pip3 install --no-build-isolation --prefix=/app .
@@ -37,22 +30,22 @@ modules:
 command: boxi
 
 cleanup:
-  - '/bin/vte-2.91'
+  - '/bin/vte-2.91-gtk4'
   - '/etc'
   - '/include'
   - '/lib/debug'
-  - '/lib/libvte-2.91.so'
+  - '/lib/libvte-2.91-gtk4.so'
   - '/lib/pkgconfig'
-  - '/lib/python3.*/site-packages/flit_core*'
+  - '/lib/python*/site-packages/*.dist-info'
   - '/lib/systemd'
   - '/libexec'
   - '/share/gir-1.0'
   - '/share/glade'
+  - '/share/locale'
+  - '/share/runtime'
   - '/share/vala'
 
 finish-args:
   - --talk-name=org.freedesktop.Flatpak
   - --socket=wayland
-  - --socket=fallback-x11
   - --device=dri
-  - --share=ipc
