@@ -35,7 +35,6 @@ cleanup:
   - '/bin/vte-2.91-gtk4'
   - '/etc'
   - '/include'
-  - '/lib/debug'
   - '/lib/libvte-2.91-gtk4.so'
   - '/lib/pkgconfig'
   - '/lib/python*/site-packages/*.dist-info'
