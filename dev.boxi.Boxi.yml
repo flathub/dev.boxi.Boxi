@@ -22,6 +22,8 @@ modules:
         url: https://github.com/allisonkarlitskaya/boxi
         tag: '5'
         commit: f92acca8fa0be994c7e80cc5e12b1261b7ec755d
+      - type: patch
+        path: 'fix-appdata.patch'
     buildsystem: simple
     build-commands:
       - pip3 install --no-build-isolation --prefix=/app .
