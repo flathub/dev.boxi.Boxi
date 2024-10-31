@@ -49,4 +49,5 @@ cleanup:
 finish-args:
   - --talk-name=org.freedesktop.Flatpak
   - --socket=wayland
+  - --socket=fallback-x11
   - --device=dri
