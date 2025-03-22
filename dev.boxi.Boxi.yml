@@ -11,7 +11,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/fastfloat/fast_float.git
-        branch: 50a80a73ab2ab256ba1c3bf86923ddd8b4202bc7
+        commit: 50a80a73ab2ab256ba1c3bf86923ddd8b4202bc7
   - name: vte
     sources:
       - type: archive
@@ -26,8 +26,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/allisonkarlitskaya/boxi
-        tag: 6
-        commit: 38e4eaa464590bb747d4e1cf9de06fa155cf91bd
+        tag: '6.1'
+        commit: 158e81cb9650694999ed5859888d0b611097b78d
     buildsystem: simple
     build-commands:
       - pip3 install --no-build-isolation --prefix=/app .
