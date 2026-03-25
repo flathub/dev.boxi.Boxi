@@ -2,55 +2,9 @@
 
 app-id: dev.boxi.Boxi
 runtime: org.gnome.Platform
-runtime-version: '48'
+runtime-version: '50'
 sdk: org.gnome.Sdk
-
-modules:
-  - name: fast_float
-    buildsystem: cmake-ninja
-    sources:
-      - type: git
-        url: https://github.com/fastfloat/fast_float.git
-        commit: 50a80a73ab2ab256ba1c3bf86923ddd8b4202bc7
-  - name: vte
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/vte/0.80/vte-0.80.0.tar.xz
-        sha256: 267f63739765e568cf8113d0e2ee8f593028946187854bebe268c778e62647c8
-    buildsystem: meson
-    config-opts:
-      - -Dgtk3=false
-      - -Dgtk4=true
-
-  - name: boxi
-    sources:
-      - type: git
-        url: https://github.com/allisonkarlitskaya/boxi
-        tag: '6.1'
-        commit: 158e81cb9650694999ed5859888d0b611097b78d
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-build-isolation --prefix=/app .
-      - glib-compile-schemas --strict /app/share/glib-2.0/schemas
-
 command: boxi
-
-cleanup:
-  - '/bin/vte-2.91-gtk4'
-  - '/share/applications/org.gnome.Vte.App.Gtk4.desktop'
-  - '/share/xdg-terminals/org.gnome.Vte.App.Gtk4.desktop'
-  - '/etc'
-  - '/include'
-  - '/lib/libvte-2.91-gtk4.so'
-  - '/lib/pkgconfig'
-  - '/lib/python*/site-packages/*.dist-info'
-  - '/lib/systemd'
-  - '/libexec'
-  - '/share/gir-1.0'
-  - '/share/glade'
-  - '/share/locale'
-  - '/share/runtime'
-  - '/share/vala'
 
 finish-args:
   - --talk-name=org.freedesktop.Flatpak
@@ -58,3 +12,49 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --device=dri
+
+cleanup:
+  - /bin/vte-2.91-gtk4
+  - /etc
+  - /include
+  - /lib/libvte-2.91-gtk4.so
+  - /lib/pkgconfig
+  - /lib/python*/site-packages/*.dist-info
+  - /lib/systemd
+  - /libexec
+  - /share/applications/org.gnome.Vte.App.Gtk4.desktop
+  - /share/cmake
+  - /share/gir-1.0
+  - /share/vala
+  - /share/xdg-terminals
+
+modules:
+  - name: fast_float
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/fastfloat/fast_float.git
+        tag: v8.2.4
+        commit: eb9ab42c0aa86d3cc41871ba7306527d95077b3b
+
+  - name: vte
+    buildsystem: meson
+    config-opts:
+      - -Dgtk3=false
+      - -Dgtk4=true
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/vte/0.80/vte-0.80.0.tar.xz
+        sha256: 267f63739765e568cf8113d0e2ee8f593028946187854bebe268c778e62647c8
+
+  - name: boxi
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-build-isolation --prefix=/app .
+      - glib-compile-schemas --strict /app/share/glib-2.0/schemas
+    sources:
+      - type: git
+        url: https://github.com/allisonkarlitskaya/boxi
+        tag: 6.1
+        commit: 158e81cb9650694999ed5859888d0b611097b78d
+
